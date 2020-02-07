@@ -1,0 +1,21 @@
+{
+  "bracketSpacing": true,
+  "tabWidth": 2,
+  "useTabs": false,
+  "printWidth": 200,
+  "trailingComma": "all",
+  "semi": true,
+  "singleQuote": true,
+  "newline-before-return": true,
+  "noDuplicateVariable": [true, "check-parameters"],
+  "noVarKeyword": true,
+  "arrowParens": "always",
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "options": {
+        "printWidth": 80
+      }
+    }
+  ]
+}
