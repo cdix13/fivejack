@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const App: React.FC = () => {
+  // for question 1
   const input1 = [
     'Enter uid1234 Muzi',
     'Enter uid4567 Prodo',
@@ -8,6 +9,14 @@ const App: React.FC = () => {
     'Enter uid1234 Prodo',
     'Change uid4567 Ryan',
   ];
+  const [answer1, setAnswer1] = useState();
+
+  // for question 1
+  const n = 5;
+  const users = [2, 1, 2, 6, 2, 4, 3, 3];
+  const [answer2, setAnswer2] = useState();
+
+  // for question 3
   const input3 = [
     ['100', 'ryan', 'music', '2'],
     ['200', 'apeach', 'math', '2'],
@@ -16,7 +25,6 @@ const App: React.FC = () => {
     ['500', 'muzi', 'music', '3'],
     ['600', 'apeach', 'music', '2'],
   ];
-  const [answer1, setAnswer1] = useState();
   const [answer3, setAnswer3] = useState();
 
   const solution1 = (record: any[] = []) => {
@@ -53,6 +61,23 @@ const App: React.FC = () => {
     }
     answer = answer.map((a) => a.msg);
     setAnswer1(answer);
+    return answer;
+  };
+
+  const solution2 = (n = 0, users: number[] = []) => {
+    let stage = 1;
+    let answer: any[] = [];
+    while (stage <= n) {
+      let fail = users.filter((u) => u === stage).length;
+      let player = users.filter((u) => u >= stage).length;
+      let rate = fail / player;
+      answer.push({ stage, rate });
+
+      stage += 1;
+    }
+    answer.sort((a, b) => b.rate - a.rate);
+    answer = answer.map((a) => a.stage);
+    setAnswer2(answer);
     return answer;
   };
 
@@ -105,10 +130,6 @@ const App: React.FC = () => {
     setAnswer3(answer);
   };
 
-  // useEffect(() => {
-  //   solution1();
-  // });
-
   return (
     <div className="App">
       <header className="App-header">
@@ -127,7 +148,28 @@ const App: React.FC = () => {
         <br />
         <button onClick={() => solution1(input1)}>Click to Answer</button>
         <br />
+        <h3>Answer</h3>
         <pre>{JSON.stringify(answer1)}</pre>
+      </div>
+      <div
+        style={{
+          border: '3px solid black',
+          marginBottom: '50px',
+          padding: '20px',
+        }}
+      >
+        <h1>Question 2</h1>
+        <h3>Input</h3>
+        <h5>N: {n}</h5>
+        <h5>
+          Users:
+          <pre>{JSON.stringify(users)}</pre>
+        </h5>
+        <br />
+        <button onClick={() => solution2(n, users)}>Click to Answer</button>
+        <br />
+        <h3>Answer</h3>
+        <pre>{JSON.stringify(answer2)}</pre>
       </div>
       <div
         style={{
@@ -142,6 +184,7 @@ const App: React.FC = () => {
         <br />
         <button onClick={() => solution3(input3)}>Click to Answer</button>
         <br />
+        <h3>Answer</h3>
         <pre>{JSON.stringify(answer3)}</pre>
       </div>
     </div>
